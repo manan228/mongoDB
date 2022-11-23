@@ -55,8 +55,11 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   req.user
-    .getCart()
-    .then((products) => {
+    .populate("cart.items.productId")
+    // .execPopulate()
+    // .getCart()
+    .then((user) => {
+      const products = user.cart.items;
       // return cart
       //   .getProducts()
       //   .then((products) => {
